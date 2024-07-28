@@ -1,0 +1,27 @@
+.reviewForm {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+
+    justify-content: center;
+    align-items: flex-start;
+
+}
+
+#username,#rating,#reviews {
+    margin: 1rem;
+    width: 1rem;
+    margin: 1rem;
+    width: 90%;
+    height: 2rem;
+    background-color: #242424;
+    border: 2px solid white, ;
+
+    color: white;
+}
+#reviews{
+    height: 4rem;
+}
+#rating{
+    width: fit-content !important;
+}
