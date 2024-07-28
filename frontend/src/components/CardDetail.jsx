@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import './CardDetail.css'
+import './CardDetail.css';
+import Button from './Button';
 
 const CardDetail = () => {
   const { isbn } = useParams();
@@ -10,7 +11,6 @@ const CardDetail = () => {
   const [error, setError] = useState(null);
   const [mrp, setMrp] = useState(null);
   const [price, setPrice] = useState(null);
-
 
   useEffect(() => {
     const fetchBookDetails = async () => {
@@ -24,10 +24,6 @@ const CardDetail = () => {
         });
         const bookData = response.data[`ISBN:${isbn}`];
         setBook(bookData);
-        console.log(bookData);
-
-
-
         setLoading(false);
       } catch (err) {
         setError(err);
@@ -40,6 +36,8 @@ const CardDetail = () => {
     const generatePrice = () => {
       return Math.floor(Math.random() * 2000);
     };
+    
+   
 
     const mrpGenerator = () => {
       let mrp = generatePrice();
@@ -51,8 +49,6 @@ const CardDetail = () => {
       return price < 1000 ? price : priceGenerator();
     };
 
-    fetchBookDetails();
-
     setMrp(mrpGenerator());
     setPrice(priceGenerator());
   }, [isbn]);
@@ -60,34 +56,56 @@ const CardDetail = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
-  // const coverId = book.cover_i;
-  const def_img = '/default-img.jpg'
+  const def_img = '/default-img.jpg';
   const coverImageUrl = book.cover ? book.cover.medium : def_img;
-  
- 
- 
-
+  const handlePayment =async()=>{
+    try {
+     let randomNumber = Math.random();
+     if(randomNumber>0.3){
+      const email = localStorage.getItem('userEmail');
+        const response = await fetch("http://localhost:8080/book/purchased", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({email,mrp})
+        });
+        const json = await response.json();
+        if (json.success) {
+          alert('Payment Successful')
+         
+        } else {
+          alert('Invalid credentials');
+        }
+      }else{
+        alert('Try Again')
+      }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred');
+      }
+     
+  }
   return (
-   <div style={{width:'100vw',display:'flex',justifyContent:'center',alignItems:'center',height:'fit-content'}}>
-    <div className='detail'>
-        <div className="image"> <img src={coverImageUrl} alt={`${book.title} cover`} /></div>
+    <div className="detail-container">
+      <div className="detail">
+        <div className="image">
+          <img src={coverImageUrl} alt={`${book.title} cover`} />
+        </div>
         <div className="content">
           <h2>{book.title}</h2>
-          <span>MRP:</span>&nbsp; &nbsp;
-          <span style={{textDecoration:'line-through'}}>&#8377; {mrp}</span>
-          &nbsp; &nbsp; &nbsp;
-          <span>&#8377;{price}</span>
-          <p>Authors:  {book.authors ? book.authors.map(author => author.name).join(', ') : 'Unknown'}</p>
+          <div className="price">
+            <span className="mrp">&#8377; {mrp}</span>
+            <span className="current-price">&#8377;{price}</span>
+          </div>
+          <p>Authors: {book.authors ? book.authors.map(author => author.name).join(', ') : 'Unknown'}</p>
           <p>Publish Date: {book.publish_date}</p>
-          <p>Publisher: {book.publishers ? book.publishers.map(publisher =>publisher.name).join(','):'Unknown'}</p>
-   
+          <p>Publisher: {book.publishers ? book.publishers.map(publisher => publisher.name).join(', ') : 'Unknown'}</p>
+          <Button text='Buy Now' submit={handlePayment}/>
         </div>
-
       </div>
-   </div>
-      
-   
-
+    </div>
   );
-}
+};
+
 export default CardDetail;

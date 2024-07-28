@@ -43,11 +43,11 @@ export default function SignUp() {
             <form  onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column',justifyContent:'flex-start',alignItems:'center',width:'100%' }}>
                 <h4>SignUp Form</h4>
                
-                    <input placeholder='enter your email' value={formData.email} id='email' onChange={handleInputChange} name="email" style={{ margin: '1rem', width: '90%', height: '2rem', backgroundColor: '#242424', border: '2px solid white', color:'white'}}></input>
+                    <input placeholder='enter your email' value={formData.email} id='email' onChange={handleInputChange} name="email" style={{ margin: '1rem', width: '90%', height: '2rem', backgroundColor: 'azure', border: '2px solid white', color:'white'}}></input>
             
-                    <input placeholder='enter your username' id="username" name='username' value={formData.username} style={{ margin: '1rem', width: '90%', height: '2rem', backgroundColor: '#242424', border: '2px solid white', color:'white' }} onChange={handleInputChange}></input>
+                    <input placeholder='enter your username' id="username" name='username' value={formData.username} style={{ margin: '1rem', width: '90%', height: '2rem', backgroundColor: 'azure', border: '2px solid white', color:'white' }} onChange={handleInputChange}></input>
               
-                    <input placeholder='enter your password' id="password" name='password' value={formData.password} style={{ margin: '1rem', width: '90%', height: '2rem', backgroundColor: '#242424', border: '2px solid white', color:'white' }} onChange={handleInputChange}></input>
+                    <input placeholder='enter your password' id="password" name='password' value={formData.password} style={{ margin: '1rem', width: '90%', height: '2rem', backgroundColor: 'azure', border: '2px solid white', color:'white' }} onChange={handleInputChange}></input>
            
 
                 <Button text='Submit' submit={handleSubmit}/>

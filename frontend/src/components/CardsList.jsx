@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Card from './card';
 
-// import { useNavigate } from 'react-router-dom';
+
 
 const CardsList = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  // const navigate = useNavigate();
+  
 
 
   useEffect(() => {
@@ -39,7 +39,9 @@ const CardsList = () => {
   if (error) return <div>Error: {error.message}</div>;
   console.log(books)
   return (
-    <div className="cards-list" style={{ display: "flex", justifyContent: "space-around", alignItems: "center", flexWrap: 'wrap', width: "100%", height: "100vh",padding:"3rem" }}>
+    <div className="books">
+      <h4>Available Books</h4>
+       <div className="cards-list" style={{ display: "flex", justifyContent: "space-around", alignItems: "center", flexWrap: 'wrap', width: "100%", height: "100vh",padding:"3rem" }}>
       {books.map((book, index) => {
         const isbn = book.isbn ? book.isbn[0] : `no-isbn-${book.key}`;
         const coverId = book.cover_i;
@@ -60,6 +62,8 @@ const CardsList = () => {
         );
       })}
     </div>
+    </div>
+   
   );
 };
 

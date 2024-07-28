@@ -12,7 +12,7 @@ export default function Navbar2() {
             <Link to="/createBook">Create</Link>
             &nbsp;  &nbsp;  &nbsp;
             <Link to="/purchased">Purchased Books</Link> &nbsp;  &nbsp;
-            <i class="fa-solid fa-user"></i>
+            <i class="fa-solid fa-user" style={{color: '#f6fefd'}}></i>
         </div>
     </div>
   )

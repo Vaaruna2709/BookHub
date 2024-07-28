@@ -29,6 +29,7 @@ export default function Login() {
       });
       const json = await response.json();
       if (json.success) {
+        localStorage.setItem('userEmail', formData.email);
         navigate('/user');
       } else {
         alert('Invalid credentials');
@@ -49,7 +50,7 @@ export default function Login() {
           id='email'
           name="email"
           onChange={handleInputChange}
-          style={{ margin: '1rem', width: '90%', height: '2rem', backgroundColor: '#242424', border: '2px solid white', color: 'white' }}
+          style={{ margin: '1rem', width: '90%', height: '2rem', backgroundColor: 'azure', border: '2px solid white', color: 'white' }}
         />
         <input
           placeholder='Enter your password'
@@ -57,7 +58,7 @@ export default function Login() {
           name='password'
           value={formData.password}
           onChange={handleInputChange}
-          style={{ margin: '1rem', width: '90%', height: '2rem', backgroundColor: '#242424', border: '2px solid white', color: 'white' }}
+          style={{ margin: '1rem', width: '90%', height: '2rem', backgroundColor: 'azure', border: '2px solid white', color: 'white' }}
           type="password"
         />
        <Button text='Submit' submit={handleSubmit}/>

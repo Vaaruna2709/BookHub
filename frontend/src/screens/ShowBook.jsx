@@ -1,12 +1,17 @@
 import React from 'react'
 import CardDetail from '../components/CardDetail'
-import Comments from '../components/Comment'
+
+import { Link } from 'react-router-dom'
+
 
 export default function ShowBook() {
+ 
   return (
     <div style={{display:'flex',flexDirection:'column'}}>
       <CardDetail></CardDetail>
-      <Comments></Comments>
+     
+      <br></br>
+      <Link to='/commentsForm'>Want to add your Review. Click Me!</Link>
 
     </div>
   )

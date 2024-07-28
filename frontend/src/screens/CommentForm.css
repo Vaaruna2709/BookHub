@@ -14,10 +14,10 @@
     margin: 1rem;
     width: 90%;
     height: 2rem;
-    background-color: #242424;
-    border: 2px solid white, ;
+    background-color: azure;
+    border: 2px solid rgb(107, 101, 101);
 
-    color: white;
+    color: black;
 }
 #reviews{
     height: 4rem;

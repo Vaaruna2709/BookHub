@@ -3,6 +3,18 @@ const router = express.Router();
 const User = require("../models/user.js");
 const { body, validationResult } = require('express-validator');
 
+router.get('/user',async(req,res)=>{
+    try {
+        const email = req.query.email;
+        const user = await User.findOne({email});
+        console.log(user)
+        res.json(user)
+      } catch (error) {
+        res.status(500).json({ message: error.message });
+      }
+    
+})
+
 router.post("/createUser", [
     body('email').isEmail(),
     body('password').isLength({ min: 8 }),
@@ -62,5 +74,8 @@ router.post("/loginUser", [
         res.status(500).json({  error: err.message });
     }
 });
+
+
+
 
 module.exports = router;

@@ -7,6 +7,9 @@ import SignUp from './screens/SignUp';
 import Login from './screens/Login';
 import CreateBook from './screens/CreateBook';
 import User from './screens/User';
+import YourBooks from './screens/YourBook';
+import CommentForm from './screens/CommentForm';
+import ProfilePage from './screens/Profile';
 
 function App() {
   return (
@@ -19,7 +22,10 @@ function App() {
           <Route exact path="/login" element={<Login/>}/>
           <Route exact path="/user" element={<User/>}/>
           <Route exact path="/createBook" element={<CreateBook/>}/>
-        
+          <Route exact path='/yourBooks' element={<YourBooks/>}/>
+          <Route exact path='/commentForm' element={<CommentForm/>}/>
+          <Route exact path='/profile' element={<ProfilePage/>}/>
+          
         </Routes>
       </div>
     </Router>

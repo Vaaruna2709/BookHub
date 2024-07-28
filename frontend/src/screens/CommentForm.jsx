@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './CommentForm.css';
-import Button from './Button';
+import Button from '../components/Button';
 
 
 export default function CommentForm({newComment}){
