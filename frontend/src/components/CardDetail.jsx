@@ -68,7 +68,7 @@ const CardDetail = () => {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({email,mrp})
+          body: JSON.stringify({email,mrp,book})
         });
         const json = await response.json();
         if (json.success) {

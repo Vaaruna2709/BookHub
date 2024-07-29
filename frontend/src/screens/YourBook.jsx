@@ -4,10 +4,14 @@ import Card from '../components/card';
 
 export default function YourBooks() {
   let [books,setBooks] = useState([]);
-  
+  let userEmail = localStorage.getItem('userEmail')
   useEffect( ()=>{
     const fetchBooks =async()=>{
-        const response = await axios.get('http://localhost:8080/book/published');
+        const response = await axios.get('http://localhost:8080/book/published',{
+          params:{
+             email: userEmail
+          }
+        })
 
         setBooks(response.data)
     }
@@ -29,7 +33,7 @@ export default function YourBooks() {
        title={book.title}
        authorName={book.author ? book.author : 'Unknown Author'}
        image={book.coverImage}
-       publisher={book.publisher?book.publisher[0]:'Unknown'}
+       publisher={book.publisher?book.publisher:'Unknown'}
        />
        )
        

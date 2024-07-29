@@ -50,7 +50,7 @@ export default function Login() {
           id='email'
           name="email"
           onChange={handleInputChange}
-          style={{ margin: '1rem', width: '90%', height: '2rem', backgroundColor: 'azure', border: '2px solid white', color: 'white' }}
+          style={{ margin: '1rem', width: '90%', height: '2rem', backgroundColor: 'azure', border: '2px solid white', color: 'black' }}
         />
         <input
           placeholder='Enter your password'
@@ -58,7 +58,7 @@ export default function Login() {
           name='password'
           value={formData.password}
           onChange={handleInputChange}
-          style={{ margin: '1rem', width: '90%', height: '2rem', backgroundColor: 'azure', border: '2px solid white', color: 'white' }}
+          style={{ margin: '1rem', width: '90%', height: '2rem', backgroundColor: 'azure', border: '2px solid white', color: 'black' }}
           type="password"
         />
        <Button text='Submit' submit={handleSubmit}/>

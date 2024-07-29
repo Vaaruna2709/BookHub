@@ -1,7 +1,13 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import "./Navbar.css"
 export default function Navbar2() {
+  const navigate = useNavigate()
+ let handleProfile =()=>{
+    navigate('/profile')
+  }
+
+
   return (
    
     <div className='myContainer' >
@@ -11,8 +17,8 @@ export default function Navbar2() {
         <div className="authentication">
             <Link to="/createBook">Create</Link>
             &nbsp;  &nbsp;  &nbsp;
-            <Link to="/purchased">Purchased Books</Link> &nbsp;  &nbsp;
-            <i class="fa-solid fa-user" style={{color: '#f6fefd'}}></i>
+            <Link to="/purchasedBooks">Purchased Books</Link> &nbsp;  &nbsp;
+            <i class="fa-solid fa-user" style={{color: '#f6fefd'}} onClick={handleProfile}></i>
         </div>
     </div>
   )

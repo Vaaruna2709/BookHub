@@ -10,8 +10,8 @@ export default function CreateBook() {
        publisher:'',
        publish_date:'',
        coverImage:'',
-       genre:''
-
+       genre:'',
+       email:localStorage.getItem('userEmail')
     });
 
     let handleInputChange = (event) => {
@@ -24,8 +24,9 @@ export default function CreateBook() {
         })
 
     }
-
+   
     let handleSubmit = async (event) => {
+     
         event.preventDefault();
         const response = await fetch("http://localhost:8080/book/create", {
             method: 'POST',
@@ -60,7 +61,7 @@ export default function CreateBook() {
            
 
                 <Button text='Submit' submit={handleSubmit}/>
-                <Link to='/login' style={{ margin: "1rem" }}>Already a User?</Link>
+              
             </form>
 
         </>

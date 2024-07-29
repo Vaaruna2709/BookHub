@@ -10,6 +10,7 @@ import User from './screens/User';
 import YourBooks from './screens/YourBook';
 import CommentForm from './screens/CommentForm';
 import ProfilePage from './screens/Profile';
+import PurchasedBooks from './screens/PurchasedBooks';
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
           <Route exact path='/yourBooks' element={<YourBooks/>}/>
           <Route exact path='/commentForm' element={<CommentForm/>}/>
           <Route exact path='/profile' element={<ProfilePage/>}/>
-          
+          <Route exact path='/purchasedBooks' element={<PurchasedBooks/>}/>
         </Routes>
       </div>
     </Router>
