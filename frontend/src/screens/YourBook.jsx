@@ -1,6 +1,9 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios';
 import Card from '../components/card';
+import { Link } from 'react-router-dom';
+import Button from '../components/Button';
+
 
 export default function YourBooks() {
   let [books,setBooks] = useState([]);
@@ -17,24 +20,31 @@ export default function YourBooks() {
     }
     fetchBooks();
   },[])
+ 
+
   return (
     <div className="books">
         <h4>Your Books!</h4>
              <div className="cards-list" style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", flexWrap: 'wrap', padding:"3rem" }}>
      
-       
+        
      {books.length>0 ?(
      books.map((book,index) =>{
        const isbn = Math.floor(Math.random()*10000);
+       
        return(
-       <Card 
-       key={index}
+        <div className="card" key={index} style={{border:'2px solid black',borderRadius:'1rem',margin:'1rem'}} >
+        <Card 
+       
        isbn ={isbn}
        title={book.title}
        authorName={book.author ? book.author : 'Unknown Author'}
        image={book.coverImage}
        publisher={book.publisher?book.publisher:'Unknown'}
        />
+        <Button submit={handleDeletion} text='delete'/>
+        </div>
+       
        )
        
      })

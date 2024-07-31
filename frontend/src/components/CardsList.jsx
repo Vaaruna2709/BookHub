@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Card from './card';
-
+import { useNavigate } from 'react-router-dom';
 
 
 const CardsList = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -49,7 +49,8 @@ const CardsList = () => {
         const coverImageUrl = coverId ? `http://covers.openlibrary.org/b/id/${coverId}.jpg` : def_img;
        
         return (
-          <Card
+          <div className="card" style={{border:'2px solid black',margin:'1rem',borderRadius:'1rem'}} onClick={() => { navigate(`/card/${isbn}?coverImageUrl=${encodeURIComponent(coverImageUrl)}`);}}>
+            <Card
             key={index}
             isbn={isbn}
             title={book.title}
@@ -59,6 +60,8 @@ const CardsList = () => {
           
            
           />
+          </div>
+          
         );
       })}
     </div>

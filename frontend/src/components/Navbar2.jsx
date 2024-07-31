@@ -18,7 +18,7 @@ export default function Navbar2() {
             <Link to="/createBook">Create</Link>
             &nbsp;  &nbsp;  &nbsp;
             <Link to="/purchasedBooks">Purchased Books</Link> &nbsp;  &nbsp;
-            <i class="fa-solid fa-user" style={{color: '#f6fefd'}} onClick={handleProfile}></i>
+            <i className="fa-solid fa-user" style={{color: '#f6fefd'}} onClick={handleProfile}></i>
         </div>
     </div>
   )

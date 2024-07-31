@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Card from '../components/card'; // Ensure correct import path for the Card component
-
+import Card from '../components/card'; 
+import { Link } from 'react-router-dom';
 export default function PurchasedBooks() {
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -26,6 +26,7 @@ export default function PurchasedBooks() {
                                 title: book.title
                             }
                         });
+                        console.log(searchResponse.data.docs[0]);
                         const coverId = searchResponse.data.docs[0]?.cover_i;
                         const coverImageUrl = coverId
                             ? `http://covers.openlibrary.org/b/id/${coverId}-L.jpg`
@@ -57,19 +58,23 @@ export default function PurchasedBooks() {
     return (
         <div className="books">
             <h4>Purchased Books</h4>
-            <div className="cards-list" style={{ display: "flex", flexWrap: 'wrap', width: "100%", height: "100vh", padding: "3rem" }}>
+            <div className="cards-list" style={{ display: "flex", flexWrap: 'wrap', width: "100%",  padding: "3rem" }}>
                 {books.map((book, index) => {
                     const isbn = book.identifiers && book.identifiers.isbn_13 ? book.identifiers.isbn_13[0] : `no-isbn-${book.key}`;
 
                     return (
-                        <Card
-                            key={index}
+                        <div  key={index} className="card" style={{border:'2px solid black',borderRadius:'1rem',margin:'1rem',display:'flex',flexDirection:'column'}}>
+                         <Card
+                           
                             isbn={isbn}
                             title={book.title}
-                            authorName={book.author_name ? book.author_name.join(', ') : 'Unknown Author'}
+                            authorName={book.authors ? book.authors[0].name : 'Unknown Author'}
                             image={book.coverImageUrl}
-                            publisher={book.publisher ? book.publisher[0] : 'Unknown'}
+                            publisher={book.publishers ? book.publishers[0].name : 'Unknown'}
                         />
+                        <Link to={book.url}>Read</Link>
+                        </div>
+                       
                     );
                 })}
             </div>

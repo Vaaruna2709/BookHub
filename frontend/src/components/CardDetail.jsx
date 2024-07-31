@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams,useLocation } from 'react-router-dom';
 import './CardDetail.css';
 import Button from './Button';
 
@@ -11,6 +11,9 @@ const CardDetail = () => {
   const [error, setError] = useState(null);
   const [mrp, setMrp] = useState(null);
   const [price, setPrice] = useState(null);
+  const { search } = useLocation();
+  const queryParams = new URLSearchParams(search);
+  const coverImageUrl = queryParams.get('coverImageUrl');
 
   useEffect(() => {
     const fetchBookDetails = async () => {
@@ -24,6 +27,7 @@ const CardDetail = () => {
         });
         const bookData = response.data[`ISBN:${isbn}`];
         setBook(bookData);
+       
         setLoading(false);
       } catch (err) {
         setError(err);
@@ -55,9 +59,10 @@ const CardDetail = () => {
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
-
+  console.log(book);
   const def_img = '/default-img.jpg';
-  const coverImageUrl = book.cover ? book.cover.medium : def_img;
+ 
+  
   const handlePayment =async()=>{
     try {
      let randomNumber = Math.random();
@@ -74,8 +79,11 @@ const CardDetail = () => {
         if (json.success) {
           alert('Payment Successful')
          
-        } else {
-          alert('Invalid credentials');
+        }else if(json.error){
+          alert(json.error)
+        }
+         else {
+          alert('Payment Failed');
         }
       }else{
         alert('Try Again')

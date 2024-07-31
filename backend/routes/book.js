@@ -44,7 +44,7 @@ router.post("/create", [
 router.get('/published',async(req,res)=>{
     try {
         const email = req.query.email;
-        console.log(email)
+        // console.log(email)
         const books = await Book.find({email});
         // console.log("books",books)
         res.json(books);
@@ -55,12 +55,23 @@ router.get('/published',async(req,res)=>{
 router.post('/purchased',async(req,res)=>{
     try{
         const {email,mrp,book} =req.body;
+        
+        const { title } = book; 
+        const existingPurchase = await Purchase.aggregate([
+            { $match: { email: email, 'book.title': title } }
+        ])
+        
+        console.log(title);
+        if (existingPurchase) {
+            // console.log("existingPurchase")
+            return res.status(400).json({ error: 'Book already purchased' });
+        }
        const purchasedBooks = await Purchase.create({
         email,
         mrp,
         book
        })
-       console.log('success',purchasedBooks);
+       
         res.json({ success: true });
     }catch (err) {
         console.log(err);
@@ -71,7 +82,7 @@ router.get('/purchased',async(req,res)=>{
     try{
         const {email} = req.query;
         const purchasedBooks = await Purchase.find({email});
-        console.log("purchasedBooks")
+        // console.log("purchasedBooks")
         res.json(purchasedBooks);
     }catch (err) {
         console.log(err);
