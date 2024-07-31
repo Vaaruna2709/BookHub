@@ -41,6 +41,7 @@ router.post("/create", [
     }
 });
 
+
 router.get('/published',async(req,res)=>{
     try {
         const email = req.query.email;
@@ -57,11 +58,12 @@ router.post('/purchased',async(req,res)=>{
         const {email,mrp,book} =req.body;
         
         const { title } = book; 
-        const existingPurchase = await Purchase.aggregate([
-            { $match: { email: email, 'book.title': title } }
-        ])
+        const existingPurchase = await Purchase.findOne({
+            email: email,
+            'book.title': title
+          });
         
-        console.log(title);
+        console.log(title,existingPurchase);
         if (existingPurchase) {
             // console.log("existingPurchase")
             return res.status(400).json({ error: 'Book already purchased' });
@@ -78,6 +80,32 @@ router.post('/purchased',async(req,res)=>{
         res.status(500).json({ error: err.message });
     }
 })
+router.delete('/:id', async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { email } = req.query;
+  
+      // Find the book by its ID
+      const book = await Book.findById(id);
+  
+      if (!book) {
+        return res.status(404).json({ success: false, message: 'Book not found' });
+      }
+  
+      // Optionally, check if the book belongs to the user (email check)
+      if (book.email !== email) {
+        return res.status(403).json({ success: false, message: 'Unauthorized' });
+      }
+  
+      // Delete the book
+      await Book.findByIdAndDelete(id);
+  
+      res.json({ success: true });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: err.message });
+    }
+  });
 router.get('/purchased',async(req,res)=>{
     try{
         const {email} = req.query;

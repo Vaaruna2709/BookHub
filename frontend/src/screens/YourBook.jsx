@@ -21,7 +21,27 @@ export default function YourBooks() {
     fetchBooks();
   },[])
  
-
+  let handleDeletion = async(book)=>{
+    try{
+      const response = await fetch(`http://localhost:8080/book/${book._id}?email=${userEmail}`,{
+       
+        method:'DELETE',
+        headers:{
+          'Content-Type':'application/json',
+        },
+       });
+       const json = await response.json();
+       if (json.success) {
+       alert('Deleted Successfully')
+       } else {
+         alert('Try again');
+       }
+    }catch(error){
+      console.error('Error:', error);
+      alert('An error occurred');
+    }
+    
+  }
   return (
     <div className="books">
         <h4>Your Books!</h4>
@@ -42,7 +62,7 @@ export default function YourBooks() {
        image={book.coverImage}
        publisher={book.publisher?book.publisher:'Unknown'}
        />
-        <Button submit={handleDeletion} text='delete'/>
+        <Button submit={()=>handleDeletion(book)} text='delete'/>
         </div>
        
        )
