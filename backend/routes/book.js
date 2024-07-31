@@ -85,22 +85,22 @@ router.delete('/:id', async (req, res) => {
       const { id } = req.params;
       const { email } = req.query;
   
-      // Find the book by its ID
       const book = await Book.findById(id);
   
       if (!book) {
         return res.status(404).json({ success: false, message: 'Book not found' });
       }
   
-      // Optionally, check if the book belongs to the user (email check)
+      
       if (book.email !== email) {
         return res.status(403).json({ success: false, message: 'Unauthorized' });
       }
   
-      // Delete the book
+     
       await Book.findByIdAndDelete(id);
+      const books = await Book.find({email})
   
-      res.json({ success: true });
+      res.json({success:true,books});
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: err.message });

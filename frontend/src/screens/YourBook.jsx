@@ -30,12 +30,15 @@ export default function YourBooks() {
           'Content-Type':'application/json',
         },
        });
-       const json = await response.json();
-       if (json.success) {
-       alert('Deleted Successfully')
-       } else {
-         alert('Try again');
+       let json = response.json()
+       if(json.success){
+        console.log(response.data)
+       setBooks(response.data)
+       }else{
+        alert('Try again')
        }
+       
+      
     }catch(error){
       console.error('Error:', error);
       alert('An error occurred');
