@@ -81,31 +81,30 @@ router.post('/purchased',async(req,res)=>{
     }
 })
 router.delete('/:id', async (req, res) => {
-    try {
-      const { id } = req.params;
-      const { email } = req.query;
-  
-      const book = await Book.findById(id);
-  
-      if (!book) {
-        return res.status(404).json({ success: false, message: 'Book not found' });
-      }
-  
-      
-      if (book.email !== email) {
-        return res.status(403).json({ success: false, message: 'Unauthorized' });
-      }
-  
-     
-      await Book.findByIdAndDelete(id);
-      const books = await Book.find({email})
-  
-      res.json({success:true,books});
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: err.message });
+  try {
+    const { id } = req.params;
+    const { email } = req.query;
+
+    const book = await Book.findById(id);
+
+    if (!book) {
+      return res.status(404).json({ success: false, message: 'Book not found' });
     }
-  });
+
+    if (book.email !== email) {
+      return res.status(403).json({ success: false, message: 'Unauthorized' });
+    }
+
+    await Book.findByIdAndDelete(id);
+    const books = await Book.find({ email });
+    console.log(books)
+    res.json({ success: true, data: books });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 router.get('/purchased',async(req,res)=>{
     try{
         const {email} = req.query;

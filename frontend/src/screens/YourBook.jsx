@@ -30,10 +30,11 @@ export default function YourBooks() {
           'Content-Type':'application/json',
         },
        });
-       let json = response.json()
+       let json = await response.json()
        if(json.success){
-        console.log(response.data)
-       setBooks(response.data)
+        console.log(json.data)
+        setBooks(json.data || []);
+
        }else{
         alert('Try again')
        }

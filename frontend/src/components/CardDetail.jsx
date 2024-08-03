@@ -50,7 +50,7 @@ const CardDetail = () => {
 
     const priceGenerator = () => {
       let price = generatePrice();
-      return price < 1000 ? price : priceGenerator();
+      return 300 < price < 1000 ? price : priceGenerator();
     };
 
     setMrp(mrpGenerator());
