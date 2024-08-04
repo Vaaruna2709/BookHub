@@ -97,7 +97,7 @@ router.delete('/:id', async (req, res) => {
 
     await Book.findByIdAndDelete(id);
     const books = await Book.find({ email });
-    console.log(books)
+    // console.log(books);
     res.json({ success: true, data: books });
   } catch (err) {
     console.error(err);

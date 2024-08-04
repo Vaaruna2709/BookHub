@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import ReviewCard from './ReviewCard';
 
 export default function Review({isbn}) {
     const [reviews, setReviews] = useState([]);
@@ -7,11 +8,9 @@ export default function Review({isbn}) {
     const fetchReviews =async()=>{
     try{
         
-            const response = await fetch('http://localhost:8080/reviews',{
+            const response = await fetch(`http://localhost:8080/reviews/${isbn}`,{
                 method:'GET',
-                params :{
-                    isbn :isbn
-                }
+               
             })
            const data = await response.json();
            setReviews(data);
@@ -32,14 +31,23 @@ export default function Review({isbn}) {
 
   return (
     <div className="reviews">
-        {
-            reviews.map(review=>{
-                return(
-                    <p>{review}</p>
+        
+            <h4>Reviews</h4>
+            {
+                reviews.length>0?(
+                    reviews.map(review=>{
+                        return(
+                          <ReviewCard username={review.username} rating={review.rating} remarks={review.review}></ReviewCard>
+                        )
+                       
+                    })
+                ):(
+                  
+                    <p>No reviews yet!</p>
                 )
-               
-            })
-        }
+            }
+           
+        
     </div>
    
   )

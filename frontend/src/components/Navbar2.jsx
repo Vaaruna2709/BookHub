@@ -12,7 +12,7 @@ export default function Navbar2() {
    
     <div className='myContainer' >
         <div className="logo" >
-            <img src="/logo.png"/>
+           <span className='bookHubLogo'>B</span>
         </div>
         <div className="authentication">
             <Link to="/createBook">Create</Link>

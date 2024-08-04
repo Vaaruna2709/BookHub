@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams,useLocation } from 'react-router-dom';
-import './CardDetail.css';
+
 import Button from './Button';
+import './CardDetail.css';
 
 const CardDetail = () => {
   const { isbn } = useParams();
@@ -50,7 +51,7 @@ const CardDetail = () => {
 
     const priceGenerator = () => {
       let price = generatePrice();
-      return 300 < price < 1000 ? price : priceGenerator();
+      return  price < 1000 && price>300 ? price : priceGenerator();
     };
 
     setMrp(mrpGenerator());

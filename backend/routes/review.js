@@ -3,7 +3,7 @@ const router = express.Router();
 const Review = require("../models/review");
 const { body, validationResult } = require('express-validator');
 
-router.get("/:isbn",async()=>{
+router.get("/:isbn",async(req,res)=>{
   try{
     const isbn = req.params.isbn;
     let reviews = await Review.find({isbn});
@@ -17,7 +17,7 @@ router.get("/:isbn",async()=>{
 
 router.post("/:id", [
   body('rating').isInt(),
-  body('review').isLength({ min: 4 }),
+  body('review').isLength({ min: 4,max:15}),
   body('username').isLength({ min: 5 })
 ], async (req, res) => {
   try {

@@ -1,8 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios';
 import Card from '../components/card';
-import { Link } from 'react-router-dom';
-import Button from '../components/Button';
+import './YourBook.css'
 
 
 export default function YourBooks() {
@@ -66,14 +65,14 @@ export default function YourBooks() {
        image={book.coverImage}
        publisher={book.publisher?book.publisher:'Unknown'}
        />
-        <Button submit={()=>handleDeletion(book)} text='delete'/>
+       <button onClick={()=>{handleDeletion(book)}} className='btn'>Delete</button>
         </div>
        
        )
        
      })
    ):(
-       <p>You haven't Created any Books</p>
+       <p style={{textAlign:'center',width:'100%'}}>You haven't Created any Books</p>
    )
 
      }
