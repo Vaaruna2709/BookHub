@@ -24,7 +24,7 @@ function App() {
           <Route exact path="/user" element={<User/>}/>
           <Route exact path="/createBook" element={<CreateBook/>}/>
           <Route exact path='/yourBooks' element={<YourBooks/>}/>
-          <Route exact path='/commentForm' element={<CommentForm/>}/>
+          <Route exact path='/review/:isbn' element={<CommentForm/>}/>
           <Route exact path='/profile' element={<ProfilePage/>}/>
           <Route exact path='/purchasedBooks' element={<PurchasedBooks/>}/>
         </Routes>

@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const user = require('./routes/user');
 const book = require("./routes/book")
+const review =require("./routes/review")
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
@@ -35,5 +36,6 @@ async function main() {
 app.use(cors());
 app.use("/api", user);
 app.use('/book',book);
+app.use('/reviews',review);
 
 app.listen(8080, () => console.log(`Server running on port 8080`));
