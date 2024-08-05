@@ -75,7 +75,32 @@ router.post("/loginUser", [
     }
 });
 
-
+router.post("/passwordChange",[
+    body('email').isEmail(),
+    body('password').isLength({ min: 8 }),
+   
+], async (req, res) => {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+        let email = req.body.email;
+        let oldUser = await User.findOne({email});
+        if(oldUser){
+            let passwordTyped = req.body.password;
+          const user = await User.updateOne({email:email},{$set :{password:passwordTyped}})
+           console.log(user)
+           return res.json({success:true})
+         }else{
+           return res.json({success:false})
+         }
+    }catch(error){
+      console.log(error)
+      return res.json({success:false})
+    }
+}
+)
 
 
 module.exports = router;

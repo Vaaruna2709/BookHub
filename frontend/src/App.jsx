@@ -11,6 +11,7 @@ import YourBooks from './screens/YourBook';
 import CommentForm from './screens/CommentForm';
 import ProfilePage from './screens/Profile';
 import PurchasedBooks from './screens/PurchasedBooks';
+import PasswordChange from './screens/PasswordChange';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route exact path='/review/:isbn' element={<CommentForm/>}/>
           <Route exact path='/profile' element={<ProfilePage/>}/>
           <Route exact path='/purchasedBooks' element={<PurchasedBooks/>}/>
+          <Route exact path="/changePassword" element={<PasswordChange/>}/>
         </Routes>
       </div>
     </Router>
