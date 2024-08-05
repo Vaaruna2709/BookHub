@@ -1,0 +1,9 @@
+.heart {
+    font-size: 24px;
+    cursor: pointer;
+    color: gray; 
+  }
+  
+  .heart.saved {
+    color: red; 
+  }

@@ -4,6 +4,7 @@ import { useParams,useLocation } from 'react-router-dom';
 
 import Button from './Button';
 import './CardDetail.css';
+import BookComponent from './BookComponent';
 
 const CardDetail = () => {
   const { isbn } = useParams();
@@ -60,10 +61,9 @@ const CardDetail = () => {
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
-  console.log(book);
+  // console.log(book);
   const def_img = '/default-img.jpg';
  
-  
   const handlePayment =async()=>{
     try {
      let randomNumber = Math.random();
@@ -111,6 +111,8 @@ const CardDetail = () => {
           <p>Publish Date: {book.publish_date}</p>
           <p>Publisher: {book.publishers ? book.publishers.map(publisher => publisher.name).join(', ') : 'Unknown'}</p>
           <Button text='Buy Now' submit={handlePayment}/>
+          <BookComponent isbn={isbn}/>
+           
         </div>
       </div>
     </div>

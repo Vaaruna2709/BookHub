@@ -7,11 +7,14 @@
    
     padding: 20px;
   }
+  .saved{
+    color: #e74c3c;
+  }
 
   .detail {
     display: flex;
     flex-direction: row;
-    background-color: #fff;
+    background-color: #ead1d1;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
