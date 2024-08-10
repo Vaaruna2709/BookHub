@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router(); 
 const User = require("../models/user.js");
 const { body, validationResult } = require('express-validator');
-
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const jwtSecret = 'bookHubSpiderInductions'
 router.get('/user',async(req,res)=>{
     try {
         const email = req.query.email;
@@ -25,11 +27,12 @@ router.post("/createUser", [
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-
+        const salt = await bcrypt.genSalt(10);
+        const safePassword = await bcrypt.hash(req.body.password,salt)
         const user = await User.create({
             username: req.body.username,
             email: req.body.email,
-            password: req.body.password
+            password: safePassword
         });
          console.log('success')
          res.json({success:true});
@@ -56,11 +59,19 @@ router.post("/loginUser", [
          if(oldUser){
             let passwordTyped = req.body.password;
             let originalPassword = oldUser.password
-            if(passwordTyped !=originalPassword){
+            let passwordCheck = await bcrypt.compare(passwordTyped,originalPassword)
+            if(!passwordCheck){
                 // alert('Enter correct password')
                return res.json({success:false})
             }else{
-               return res.json({success:true})
+              const data ={
+                 user:{
+                    id : oldUser._id
+                 }
+              }
+               const authToken = jwt.sign(data,jwtSecret);
+            //    console.log(authToken)
+               return res.json({success:true,authToken:authToken})
             }
          }else{
            return res.json({success:false})
@@ -88,8 +99,10 @@ router.post("/passwordChange",[
         let email = req.body.email;
         let oldUser = await User.findOne({email});
         if(oldUser){
-            let passwordTyped = req.body.password;
-          const user = await User.updateOne({email:email},{$set :{password:passwordTyped}})
+            
+            const salt = await bcrypt.genSalt(10);
+            const safePassword = await bcrypt.hash(req.body.password,salt)
+          const user = await User.updateOne({email:email},{$set :{password:safePassword}})
            console.log(user)
            return res.json({success:true})
          }else{

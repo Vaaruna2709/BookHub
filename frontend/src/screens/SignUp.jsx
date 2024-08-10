@@ -31,7 +31,9 @@ export default function SignUp() {
         });
         const json = await response.json();
         if (json.success) {
-            navigate('/user')
+            localStorage.setItem('userEmail', formData.email);
+            navigate('/user');
+           
         } else {
             alert('Invalid credentials')
         }
