@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams, useLocation } from 'react-router-dom';
 import './CardDetail.css';
 import BookComponent from './BookComponent';
-import GPayButton from './GpayButton'; 
+import GPayButton from './GpayButton';
 
 const CardDetail = () => {
   const { isbn } = useParams();
@@ -27,6 +27,11 @@ const CardDetail = () => {
           }
         });
         const bookData = response.data[`ISBN:${isbn}`];
+        if (!bookData) {
+          setError({ message: 'Book not found for this ISBN' });
+          setLoading(false);
+          return;
+        }
         setBook(bookData);
         setLoading(false);
       } catch (err) {
@@ -91,6 +96,7 @@ const CardDetail = () => {
         </div>
         <div className="content">
           <h2>{book.title}</h2>
+        
           <div className="price">
             <span className="mrp">&#8377; {mrp}</span>
             <span className="current-price">&#8377;{price}</span>
@@ -98,10 +104,10 @@ const CardDetail = () => {
           <p>Authors: {book.authors ? book.authors.map(author => author.name).join(', ') : 'Unknown'}</p>
           <p>Publish Year: {book.publish_date}</p>
           <p>Publisher: {book.publishers ? book.publishers.map(publisher => publisher.name).join(', ') : 'Unknown'}</p>
-          <GPayButton 
-            price={price} 
-            onPaymentSuccess={handlePaymentSuccess} 
-            onPaymentFailure={handlePaymentFailure} 
+          <GPayButton
+            price={price}
+            onPaymentSuccess={handlePaymentSuccess}
+            onPaymentFailure={handlePaymentFailure}
           />
           <BookComponent isbn={isbn} />
         </div>

@@ -7,6 +7,7 @@ const review =require("./routes/review")
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
+
 app.use(bodyParser.json());
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
@@ -16,8 +17,14 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(bodyParser.json({ limit: '5mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '5mb' }));
+app.use((err, req, res, next) => {
+  if (err.type === 'entity.too.large') {
+    return res.status(413).json({ error: 'Image too large. Max allowed size is 5MB.' });
+  }
+  next(err);
+});
 
 app.get("/", (req, res) => {
     res.send("root is working");

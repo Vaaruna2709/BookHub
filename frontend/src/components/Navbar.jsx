@@ -10,7 +10,7 @@ export default function Navbar() {
         </div>
         <div className="authentication">
             <Link to="/login">Login</Link>
-            &nbsp;  &nbsp;  &nbsp;
+            &nbsp;  &nbsp;
             <Link to="/createUser">SignUp</Link>
         </div>
     </div>

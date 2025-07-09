@@ -61,6 +61,7 @@ export default function CommentForm(){
     return(
         <div>
             <form className='reviewForm'>
+              <h3>Write a review!</h3>
                 <input placeholder='enter username'value={formData.username} name='username'type="text" onChange={handleInputChange} id='username' ></input>
                 <textarea placeholder='enter your reviews' value={formData.review} name="review" onChange={handleInputChange} id='reviews'></textarea>
                 <input placeholder='enter rating'value={formData.rating} name='rating' type='number'onChange={handleInputChange} id='rating' ></input>

@@ -16,8 +16,8 @@ export default function Navbar2() {
         </div>
         <div className="authentication">
             <Link to="/createBook">Create</Link>
-            &nbsp;  &nbsp;  &nbsp;
-            <Link to="/purchasedBooks">Purchased Books</Link> &nbsp;  &nbsp;
+            &nbsp;  &nbsp; 
+            <Link to="/purchasedBooks">Purchased Books</Link> &nbsp;  
             <i className="fa-solid fa-user" style={{color: '#f6fefd'}} onClick={handleProfile}></i>
         </div>
     </div>

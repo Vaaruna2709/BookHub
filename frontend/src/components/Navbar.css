@@ -1,23 +1,72 @@
+/* Navbar - Enhanced */
 .myContainer {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 4rem;
-    background-color: #001f3f;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4.5rem;
+  background: linear-gradient(to right, #fff7d5, #fff0b3);
+  padding: 0 2rem;
+  border-bottom: 1px solid #f7d792;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
 }
-  
-img{
-    height: 3rem;
+
+.bookHubLogo {
+  font-family: 'Kalnia Glaze', serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #3b3b3b;
+  display: flex;
+  align-items: center;
 }
-.authentication{
-    padding: 1.5rem;
-    width: fit-content;
+
+.nav-buttons {
+  display: flex;
+  gap: 0.5rem;
 }
-.bookHubLogo{
-    font-family: "Kalnia Glaze", serif;
-    margin: 1rem;
-    font-weight: 900;
-    font-size: 2.5rem;
+
+.nav-buttons button {
+  background-color: #ffa502;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-buttons button:hover {
+  background-color: #e17000;
+  transform: scale(1.03);
+}
+
+.user-page {
+  background-color: #fff9dc;
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+}
+
+.user-page h2 {
+  font-size: 2rem;
+  color: #2f3640;
+  margin-bottom: 1rem;
+}
+
+.user-page .empty-message {
+  color: #555;
+  font-size: 1.1rem;
+  margin: 1rem 0;
+}
+
+.user-page .loading {
+  font-style: italic;
+  color: #888;
+  margin-top: 1rem;
 }

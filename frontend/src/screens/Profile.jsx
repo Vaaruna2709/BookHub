@@ -37,7 +37,14 @@ const ProfilePage = () => {
   }, []);
 
   const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
+      const selectedFile = event.target.files[0];
+
+  if (selectedFile && selectedFile.size > 1 * 1024 * 1024) { // 2MB limit
+    alert("File too large. Please upload a file smaller than 2MB.");
+    return;
+  }
+
+  setFile(selectedFile);
   };
 
   const handleUploadPhoto = () => {
